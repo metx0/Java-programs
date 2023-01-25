@@ -1,17 +1,19 @@
-private class Computadora{
+import javax.swing.JOptionPane;
+
+public class Computadora{
 	
 	int discoDuro;
-	float velocidadProcesador;
+	double velocidadProcesador;
 	Computadora peer;
 	String sistemaOperativo;
 	String nombre;
+	String[] memoria = new String[10];
 
-	public computadora(String nombreEquipo){
+	public Computadora(String nombreEquipo){
 		discoDuro = 640;
 		velocidadProcesador = 3.1;
 		sistemaOperativo = "Microsoft Windows 7";
-		nombre = nombreEquipo;
-		String[] memoria = new String[10];		
+		nombre = nombreEquipo;		
 	}
 	
 	public void encender(){
@@ -21,11 +23,12 @@ private class Computadora{
 	}
 	
 	public boolean ejecutar(String programa, int posicion){
-		if(posicion != 0){
+		if(posicion > 0){
 			memoria[posicion] = programa;
 			JOptionPane.showMessageDialog(null, nombre + ": Ejecutando el programa " + programa);
 			return true;
-			}
+		} else {
+			return false;
 		}
 	}
 	
@@ -35,7 +38,6 @@ private class Computadora{
 	
 	public void enviarDatos(){
 		peer.recibirDatos(JOptionPane.showInputDialog("Escribe el dato a enviar"));
-		return 0;
 	}
 	
 	public void conectar(Computadora c){
@@ -52,15 +54,17 @@ private class Computadora{
 	
 	public void apagar(){
 		JOptionPane.showMessageDialog(null, "Cerrando sesión...");
-		for(int i = 1; i < 11; i++){
+
+		for(int i = 1; i < 10; i++){
 			memoria[i] = null;
 		}
+
 		JOptionPane.showMessageDialog(null, nombre + ": Windows se está cerrando");
 		memoria[0] = null;
 	}
 	
-	public static void aumentarDiscoDuro(){
-		discoDuro = 1000;
+	public void aumentarDiscoDuro(){
+		discoDuro += 1000;
 	}
 	
 	public static void main(String[] args){
