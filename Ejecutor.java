@@ -34,6 +34,12 @@ public class Ejecutor extends TareaPeriodica {
 		}
 		return -1;
 	}
+	
+	public void run() {
+		if (this.necesitaEjecucion()) {
+			this.ejecutarTarea();
+		}
+	}
 
 	public void setComando(String comando) {
 		this.comando = comando;
